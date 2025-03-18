@@ -12,5 +12,4 @@ Youtube videos (RU):<br />
 https://youtu.be/W3r2W4ocGMU<br />
 https://youtu.be/dVXzRz50VCQ
 <br />
-**Board pins:**<br />
-Pins assignment can be found in this file - cfg/ports.xdc
+

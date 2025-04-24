@@ -8,10 +8,7 @@ cell xilinx.com:ip:clk_wiz pll_0 {
   CLKOUT1_REQUESTED_OUT_FREQ 61.44
   CLKOUT2_USED true
   CLKOUT2_REQUESTED_OUT_FREQ 61.44
-  #CLKOUT2_REQUESTED_PHASE 157.5
-  CLKOUT3_USED true
-  CLKOUT3_REQUESTED_OUT_FREQ 122.88
-  #CLKOUT3_REQUESTED_PHASE 202.5
+  CLKOUT2_REQUESTED_PHASE 90
   USE_RESET false
 } {
   clk_in1 adc_clk_i
@@ -86,13 +83,9 @@ cell pavel-demin:user:axis_red_pitaya_dac dac_0 {
   DAC_DATA_WIDTH 14
 } {
   aclk pll_0/clk_out1
-  ddr_clk pll_0/clk_out2
-  wrt_clk pll_0/clk_out3
+  wrt_clk pll_0/clk_out2
   locked pll_0/locked
   dac_clk dac_clk_o
-  dac_rst dac_rst_o
-  dac_sel dac_sel_o
-  dac_wrt dac_wrt_o
   dac_dat dac_dat_o
   s_axis_tvalid const_0/dout
 }

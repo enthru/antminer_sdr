@@ -166,7 +166,19 @@ cell pavel-demin:user:axis_selector sel_0 {
   aresetn /rst_0/peripheral_aresetn
 }
 
-# Create axis_broadcaster
+cell xilinx.com:ip:axis_data_fifo cdc_pair1 {
+  TDATA_NUM_BYTES.VALUE_SRC USER
+  TDATA_NUM_BYTES 6
+  IS_ACLK_ASYNC 1
+  FIFO_DEPTH 4096
+  FIFO_MEMORY_TYPE auto
+} {
+  S_AXIS sel_0/M_AXIS
+  s_axis_aclk /pll_0/clk_out1
+  s_axis_aresetn /rst_0/peripheral_aresetn
+  m_axis_aclk /pll_0/clk_out3
+}
+
 cell xilinx.com:ip:axis_broadcaster bcast_1 {
   S_TDATA_NUM_BYTES.VALUE_SRC USER
   M_TDATA_NUM_BYTES.VALUE_SRC USER
@@ -175,12 +187,24 @@ cell xilinx.com:ip:axis_broadcaster bcast_1 {
   M00_TDATA_REMAP {tdata[23:0]}
   M01_TDATA_REMAP {tdata[47:24]}
 } {
-  S_AXIS sel_0/M_AXIS
-  aclk /pll_0/clk_out1
+  S_AXIS cdc_pair1/M_AXIS
+  aclk /pll_0/clk_out3
   aresetn /rst_0/peripheral_aresetn
 }
 
-# Create axis_broadcaster
+cell xilinx.com:ip:axis_data_fifo cdc_pair2 {
+  TDATA_NUM_BYTES.VALUE_SRC USER
+  TDATA_NUM_BYTES 6
+  IS_ACLK_ASYNC 1
+  FIFO_DEPTH 4096
+  FIFO_MEMORY_TYPE auto
+} {
+  S_AXIS bcast_0/M01_AXIS
+  s_axis_aclk /pll_0/clk_out1
+  s_axis_aresetn /rst_0/peripheral_aresetn
+  m_axis_aclk /pll_0/clk_out3
+}
+
 cell xilinx.com:ip:axis_broadcaster bcast_2 {
   S_TDATA_NUM_BYTES.VALUE_SRC USER
   M_TDATA_NUM_BYTES.VALUE_SRC USER
@@ -189,8 +213,8 @@ cell xilinx.com:ip:axis_broadcaster bcast_2 {
   M00_TDATA_REMAP {tdata[23:0]}
   M01_TDATA_REMAP {tdata[47:24]}
 } {
-  S_AXIS bcast_0/M01_AXIS
-  aclk /pll_0/clk_out1
+  S_AXIS cdc_pair2/M_AXIS
+  aclk /pll_0/clk_out3
   aresetn /rst_0/peripheral_aresetn
 }
 
@@ -201,9 +225,9 @@ for {set i 0} {$i <= 3} {incr i} {
     INPUT_DATA_WIDTH.VALUE_SRC USER
     FILTER_TYPE Interpolation
     NUMBER_OF_STAGES 6
-    FIXED_OR_INITIAL_RATE 640
+    FIXED_OR_INITIAL_RATE 1280
     INPUT_SAMPLE_FREQUENCY 0.096
-    CLOCK_FREQUENCY 61.44
+    CLOCK_FREQUENCY 122.88
     INPUT_DATA_WIDTH 24
     QUANTIZATION Truncation
     OUTPUT_DATA_WIDTH 24
@@ -211,7 +235,7 @@ for {set i 0} {$i <= 3} {incr i} {
     HAS_ARESETN true
   } {
     S_AXIS_DATA bcast_[expr $i / 2 + 1]/M0[expr $i % 2]_AXIS
-    aclk /pll_0/clk_out1
+    aclk /pll_0/clk_out3
     aresetn /rst_0/peripheral_aresetn
   }
 
@@ -224,7 +248,7 @@ cell  xilinx.com:ip:axis_combiner comb_0 {
 } {
   S00_AXIS cic_0/M_AXIS_DATA
   S01_AXIS cic_1/M_AXIS_DATA
-  aclk /pll_0/clk_out1
+  aclk /pll_0/clk_out3
   aresetn /rst_0/peripheral_aresetn
 }
 
@@ -233,14 +257,14 @@ cell pavel-demin:user:axis_constant phase_0 {
   AXIS_TDATA_WIDTH 32
 } {
   cfg_data slice_1/dout
-  aclk /pll_0/clk_out1
+  aclk /pll_0/clk_out3
 }
 
 # Create dds_compiler
 cell xilinx.com:ip:dds_compiler dds_0 {
-  DDS_CLOCK_RATE 61.44
+  DDS_CLOCK_RATE 122.88
   SPURIOUS_FREE_DYNAMIC_RANGE 138
-  FREQUENCY_RESOLUTION 0.2
+  FREQUENCY_RESOLUTION 0.1
   PHASE_INCREMENT Streaming
   HAS_ARESETN true
   HAS_PHASE_OUT false
@@ -249,13 +273,13 @@ cell xilinx.com:ip:dds_compiler dds_0 {
   DSP48_USE Minimal
 } {
   S_AXIS_PHASE phase_0/M_AXIS
-  aclk /pll_0/clk_out1
+  aclk /pll_0/clk_out3
   aresetn slice_0/dout
 }
 
 # Create axis_lfsr
 cell pavel-demin:user:axis_lfsr lfsr_0 {} {
-  aclk /pll_0/clk_out1
+  aclk /pll_0/clk_out3
   aresetn /rst_0/peripheral_aresetn
 }
 
@@ -272,7 +296,7 @@ cell xilinx.com:ip:cmpy mult_0 {
   s_axis_b_tdata dds_0/m_axis_data_tdata
   s_axis_b_tvalid dds_0/m_axis_data_tvalid
   S_AXIS_CTRL lfsr_0/M_AXIS
-  aclk /pll_0/clk_out1
+  aclk /pll_0/clk_out3
 }
 
 # Create dsp48
@@ -283,7 +307,7 @@ cell pavel-demin:user:dsp48 mult_1 {
 } {
   A mult_0/m_axis_dout_tdata
   B slice_3/dout
-  CLK /pll_0/clk_out1
+  CLK /pll_0/clk_out3
 }
 
 # Create dsp48
@@ -294,7 +318,7 @@ cell pavel-demin:user:dsp48 mult_2 {
 } {
   A mult_0/m_axis_dout_tdata
   B slice_4/dout
-  CLK /pll_0/clk_out1
+  CLK /pll_0/clk_out3
 }
 
 # Create axis_combiner
@@ -304,7 +328,7 @@ cell  xilinx.com:ip:axis_combiner comb_1 {
 } {
   S00_AXIS cic_2/M_AXIS_DATA
   S01_AXIS cic_3/M_AXIS_DATA
-  aclk /pll_0/clk_out1
+  aclk /pll_0/clk_out3
   aresetn /rst_0/peripheral_aresetn
 }
 
@@ -319,7 +343,7 @@ cell xilinx.com:ip:cordic cordic_0 {
   COMPENSATION_SCALING BRAM
 } {
   S_AXIS_CARTESIAN comb_1/M_AXIS
-  aclk /pll_0/clk_out1
+  aclk /pll_0/clk_out3
 }
 
 # Create xlconcat

@@ -58,33 +58,63 @@ set_property DRIVE 4 [get_ports {dac_dat_o[*]}]
 # set_property IOB TRUE [get_ports {dac_dat_o[*]}]
 
 #l8p
-set_property PACKAGE_PIN W14 [get_ports {dac_dat_o[0]}]
+#set_property PACKAGE_PIN W14 [get_ports {dac_dat_o[0]}]
 #l8n
-set_property PACKAGE_PIN Y14 [get_ports {dac_dat_o[1]}]
+#set_property PACKAGE_PIN Y14 [get_ports {dac_dat_o[1]}]
 #l6p
-set_property PACKAGE_PIN P14 [get_ports {dac_dat_o[2]}]
+#set_property PACKAGE_PIN P14 [get_ports {dac_dat_o[2]}]
 #l6n
-set_property PACKAGE_PIN R14 [get_ports {dac_dat_o[3]}]
+#set_property PACKAGE_PIN R14 [get_ports {dac_dat_o[3]}]
 #l5n
-set_property PACKAGE_PIN T15 [get_ports {dac_dat_o[4]}]
+#set_property PACKAGE_PIN T15 [get_ports {dac_dat_o[4]}]
 #l5p
-set_property PACKAGE_PIN T14 [get_ports {dac_dat_o[5]}]
+#set_property PACKAGE_PIN T14 [get_ports {dac_dat_o[5]}]
 #l4p
-set_property PACKAGE_PIN V12 [get_ports {dac_dat_o[6]}]
+#set_property PACKAGE_PIN V12 [get_ports {dac_dat_o[6]}]
 #l4n
-set_property PACKAGE_PIN W13 [get_ports {dac_dat_o[7]}]
+#set_property PACKAGE_PIN W13 [get_ports {dac_dat_o[7]}]
 #l3p
-set_property PACKAGE_PIN V13 [get_ports {dac_dat_o[8]}]
+#set_property PACKAGE_PIN V13 [get_ports {dac_dat_o[8]}]
 #0_plug2
-set_property PACKAGE_PIN R19 [get_ports {dac_dat_o[9]}]
+#set_property PACKAGE_PIN R19 [get_ports {dac_dat_o[9]}]
 #l2p
-set_property PACKAGE_PIN T12 [get_ports {dac_dat_o[10]}]
+#set_property PACKAGE_PIN T12 [get_ports {dac_dat_o[10]}]
 #l2n
-set_property PACKAGE_PIN U12 [get_ports {dac_dat_o[11]}]
+#set_property PACKAGE_PIN U12 [get_ports {dac_dat_o[11]}]
 #l1n
-set_property PACKAGE_PIN T10 [get_ports {dac_dat_o[12]}]
+#set_property PACKAGE_PIN T10 [get_ports {dac_dat_o[12]}]
 #l1p
-set_property PACKAGE_PIN T11 [get_ports {dac_dat_o[13]}]
+#set_property PACKAGE_PIN T11 [get_ports {dac_dat_o[13]}]
+
+
+#l8p
+set_property PACKAGE_PIN T11 [get_ports {dac_dat_o[0]}]
+#l8n
+set_property PACKAGE_PIN T10 [get_ports {dac_dat_o[1]}]
+#l6p
+set_property PACKAGE_PIN U12 [get_ports {dac_dat_o[2]}]
+#l6n
+set_property PACKAGE_PIN T12 [get_ports {dac_dat_o[3]}]
+#l5n
+set_property PACKAGE_PIN R19 [get_ports {dac_dat_o[4]}]
+#l5p
+set_property PACKAGE_PIN V13 [get_ports {dac_dat_o[5]}]
+#l4p
+set_property PACKAGE_PIN W13 [get_ports {dac_dat_o[6]}]
+#l4n
+set_property PACKAGE_PIN V12 [get_ports {dac_dat_o[7]}]
+#l3p
+set_property PACKAGE_PIN T14 [get_ports {dac_dat_o[8]}]
+#0_plug2
+set_property PACKAGE_PIN T15 [get_ports {dac_dat_o[9]}]
+#l2p
+set_property PACKAGE_PIN R14 [get_ports {dac_dat_o[10]}]
+#l2n
+set_property PACKAGE_PIN P14 [get_ports {dac_dat_o[11]}]
+#l1n
+set_property PACKAGE_PIN Y14 [get_ports {dac_dat_o[12]}]
+#l1p
+set_property PACKAGE_PIN W14 [get_ports {dac_dat_o[13]}]
 
 # DAC stuff
 set_property IOSTANDARD LVCMOS33 [get_ports dac_*_o]

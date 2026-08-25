@@ -9,6 +9,7 @@ Hardware howto - https://enthru.net/?p=2965<br />
 Software quick start - https://enthru.net/?p=2960<br />
 
 Youtube videos (RU):<br />
+https://youtu.be/sbO1ANndkBE<br />
 https://youtu.be/W3r2W4ocGMU<br />
 https://youtu.be/dVXzRz50VCQ
 <br />

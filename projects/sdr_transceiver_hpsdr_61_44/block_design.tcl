@@ -7,8 +7,10 @@ cell xilinx.com:ip:clk_wiz pll_0 {
   CLKOUT1_USED true
   CLKOUT1_REQUESTED_OUT_FREQ 61.44
   CLKOUT2_USED true
-  CLKOUT2_REQUESTED_OUT_FREQ 61.44
-  CLKOUT2_REQUESTED_PHASE 90
+  CLKOUT2_REQUESTED_OUT_FREQ 122.88
+  CLKOUT2_REQUESTED_PHASE 180
+  CLKOUT3_USED true
+  CLKOUT3_REQUESTED_OUT_FREQ 122.88
   USE_RESET false
 } {
   clk_in1 adc_clk_i
@@ -82,7 +84,7 @@ cell pavel-demin:user:axis_red_pitaya_adc adc_0 {
 cell pavel-demin:user:axis_red_pitaya_dac dac_0 {
   DAC_DATA_WIDTH 14
 } {
-  aclk pll_0/clk_out1
+  aclk pll_0/clk_out3
   wrt_clk pll_0/clk_out2
   locked pll_0/locked
   dac_clk dac_clk_o
@@ -201,7 +203,7 @@ cell pavel-demin:user:port_slicer cfg_slice_0 {
 }
 
 module rx_0 {
-  source projects/sdr_transceiver_hpsdr_122_88/rx.tcl
+  source projects/sdr_transceiver_hpsdr_61_44/rx.tcl
 } {
   slice_0/din rst_slice_0/dout
   slice_1/din rst_slice_1/dout
@@ -261,7 +263,7 @@ cell pavel-demin:user:port_slicer cfg_slice_1 {
 }
 
 module tx_0 {
-  source projects/sdr_transceiver_hpsdr_122_88/tx.tcl
+  source projects/sdr_transceiver_hpsdr_61_44/tx.tcl
 } {
   fifo_0/aresetn rst_slice_2/dout
   keyer_0/key_flag key_slice_0/dout
@@ -292,7 +294,7 @@ cell pavel-demin:user:port_slicer cfg_slice_2 {
 }
 
 module codec {
-  source projects/sdr_transceiver_hpsdr_122_88/codec.tcl
+  source projects/sdr_transceiver_hpsdr_61_44/codec.tcl
 } {
   fifo_0/aresetn rst_slice_3/dout
   keyer_0/key_flag key_slice_1/dout
@@ -335,7 +337,7 @@ wire codec/bram_0/BRAM_PORTA hub_0/B05_BRAM
 # RX 1
 
 #module rx_1 {
-#  source projects/sdr_receiver_122_88/rx.tcl
+#  source projects/sdr_receiver_61_44/rx.tcl
 #} {
 #  hub_0/S_AXI ps_0/M_AXI_GP1
 #}

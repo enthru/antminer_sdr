@@ -2,7 +2,7 @@
 
 module axis_red_pitaya_adc #
 (
-  parameter integer DAC_DATA_WIDTH = 12
+  parameter integer ADC_DATA_WIDTH = 12
 )
 (
   input  wire        aclk,
